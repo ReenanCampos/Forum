@@ -1,4 +1,4 @@
-package br.forum.DAO.dao;
+package br.forum.DAO.IDAO;
 import br.forum.Model.Topico;
 import java.util.*;
 public interface ITopicoDAO {

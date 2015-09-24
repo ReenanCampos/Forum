@@ -1,8 +1,8 @@
-package br.forum.DAO;
+package br.forum.DAO.IDAOManager;
 
-import br.forum.DAO.dao.TopicoDAO;
-import br.forum.DAO.dao.AssuntoDAO;
-import br.forum.DAO.dao.PostDAO;
+import br.forum.DAO.DAO.TopicoDAO;
+import br.forum.DAO.DAO.AssuntoDAO;
+import br.forum.DAO.DAO.PostDAO;
 
 public interface IDAOManager {
     void iniciar();

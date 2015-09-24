@@ -1,6 +1,8 @@
-package br.forum.DAO;
+package br.forum.DAO.DAOManager;
 
-import br.forum.DAO.dao.AssuntoDAO;
+import br.forum.DAO.IDAOManager.IAssuntoManager;
+import br.forum.DAO.IDAOManager.IDAOManager;
+import br.forum.DAO.DAO.AssuntoDAO;
 import br.forum.Model.Assunto;
 import java.util.List;
 public class AssuntoManager implements IAssuntoManager{

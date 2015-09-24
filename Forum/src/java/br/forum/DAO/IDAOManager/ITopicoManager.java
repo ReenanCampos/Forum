@@ -1,5 +1,5 @@
 
-package br.forum.DAO;
+package br.forum.DAO.IDAOManager;
 
 import br.forum.Model.Topico;
 import java.util.*;

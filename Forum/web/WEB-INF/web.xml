@@ -8,13 +8,21 @@
         <servlet-name>TopicoServlet</servlet-name>
         <servlet-class>br.forum.Controller.TopicoServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>PostServlet</servlet-name>
+        <servlet-class>br.forum.Controller.PostServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AssuntoServlet</servlet-name>
         <url-pattern>/home</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>TopicoServlet</servlet-name>
-        <url-pattern>/topicos</url-pattern>
+        <url-pattern>/topicos/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PostServlet</servlet-name>
+        <url-pattern>/posts/*</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

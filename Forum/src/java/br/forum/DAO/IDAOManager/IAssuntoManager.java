@@ -1,4 +1,4 @@
-package br.forum.DAO;
+package br.forum.DAO.IDAOManager;
 import br.forum.Model.Assunto;
 import java.util.List;
 public interface IAssuntoManager {

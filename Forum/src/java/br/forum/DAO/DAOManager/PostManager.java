@@ -1,23 +1,22 @@
-package br.forum.DAO;
-
-import br.forum.DAO.dao.AssuntoDAO;
-import br.forum.DAO.dao.TopicoDAO;
+package br.forum.DAO.DAOManager;
+import br.forum.DAO.DAO.*;
+import br.forum.DAO.IDAOManager.IDAOManager;
+import br.forum.DAO.IDAOManager.IPostManager;
 import br.forum.Model.Assunto;
-import br.forum.Model.Topico;
+import br.forum.Model.Post;
 import java.util.List;
-
-public class TopicoManager implements ITopicoManager{
+public class PostManager implements IPostManager{
 
     @Override
-    public Topico cadastrar(Topico topico) {
+    public Post cadastrar(Post post) {
         IDAOManager manager = new DAOManager();
         try{
             manager.iniciar();
-            TopicoDAO ad = manager.getTopicoDAO();
-            ad.inserir(topico);
+            PostDAO ad = manager.getPostDAO();
+            ad.inserir(post);
             manager.confirmarTransação();
             manager.encerrar();
-            return topico;
+            return post;
         }catch(Exception ex){
             manager.abortarTransação();
             throw ex;
@@ -25,15 +24,15 @@ public class TopicoManager implements ITopicoManager{
     }
 
     @Override
-    public Topico procurarID(Integer id) {
+    public Post procurarID(Integer id) {
         IDAOManager manager = new DAOManager();
         try{
             manager.iniciar();
-            TopicoDAO td = manager.getTopicoDAO();
-            Topico t = td.findById(id);
+            PostDAO ad = manager.getPostDAO();
+            Post a = ad.findById(id);
             manager.confirmarTransação();
             manager.encerrar();
-            return t;
+            return a;
         }catch(Exception ex){
             manager.abortarTransação();
             throw ex;
@@ -41,15 +40,15 @@ public class TopicoManager implements ITopicoManager{
     }
 
     @Override
-    public List<Topico> procurarALLByAssunto(Integer id) {
+    public List<Post> procurarALLByTopico(Integer id) {
         IDAOManager manager = new DAOManager();
         try{
             manager.iniciar();
-            TopicoDAO td = manager.getTopicoDAO();
-            List<Topico> ts = td.findAllByAssunto(id);
+            PostDAO ad = manager.getPostDAO();
+            List<Post> as = ad.findAllByTopico(id);
             manager.confirmarTransação();
             manager.encerrar();
-            return ts;
+            return as;
         }catch(Exception ex){
             manager.abortarTransação();
             throw ex;

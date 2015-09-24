@@ -2,35 +2,26 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Assuntos</title>
+        <title>Topicos</title>
     </head>
     <body>
-        <h1> Forum Progmania - Assuntos </h1>
-        <h3> Bem Vindo !</h3>
+        <h1> Forum Progmania - Posts </h1>
+        <h3><a href="/Forum/topicos/?idAssunto=${idAssuntoFK}">Voltar para Tópicos</a></h3>
         <hr>
-        <div class="pa">
-            <table>
-                <tr>
-                    <th>Assunto</th>
-                    <th>Descrição</th>
-                    <th>Ultimo Post</th>
-                </tr>
-                <c:forEach var="p" items="${assuntos}">
-                    <tr style="border: solid 1px; text-align:left; font-size:15px">
-                        <td style="font-size:18px;"><a href="topicos/?idAssunto=${p.idAssunto}"><c:out value="${p.nome}"></c:out></a></td>
-                        <td style="font-size:15px;"><c:out value="${p.descricao}"></c:out></td>
-                        <td>ULTIMO POST</td>
-                    </tr>
-                </c:forEach>
-            </table>
-        </div>
+        <div style="text-align: center;"> 
+            <c:forEach var="p" items="${posts}" >
+                <div class="post">
+                    <div class="post cabecalho">
+                        <p>Autor: <c:out value="${p.autor}"></c:out> <br>
+                        Data: <c:out value="${p.dataCriacao}"></c:out></p>
+                    </div>
+                    <p style="text-align: left; padding-left: 3%;"><c:out value="${p.texto}"></c:out></p>
+                </div>
+            </c:forEach>
+        </div
     </body>
     
     <style>
-        
-        body{
-            text-align:center;
-        }
         
         a{
             text-decoration: none;
@@ -48,9 +39,6 @@
         a:active{
             color: #0014EB;
         }
-        
-        
-        
         .pa {
 	margin:0px;padding:0px;
 	width:100%;
@@ -102,8 +90,6 @@
 .pa tr:nth-child(odd){ background-color:#d8d8d8; }
 .pa tr:nth-child(even)    { background-color:#f2f2f2; }.pa td{
 	vertical-align:middle;
-	
-	
 	border:1px solid #000000;
 	border-width:0px 1px 1px 0px;
 	text-align:left;

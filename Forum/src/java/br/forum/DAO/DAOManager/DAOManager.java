@@ -1,7 +1,9 @@
-package br.forum.DAO;
-import br.forum.DAO.dao.TopicoDAO;
-import br.forum.DAO.dao.AssuntoDAO;
-import br.forum.DAO.dao.PostDAO;
+package br.forum.DAO.DAOManager;
+import br.forum.DAO.IDAOManager.IDAOManager;
+import br.forum.Exceptions.DAOException;
+import br.forum.DAO.DAO.TopicoDAO;
+import br.forum.DAO.DAO.AssuntoDAO;
+import br.forum.DAO.DAO.PostDAO;
 import java.sql.*;
 public class DAOManager implements IDAOManager{
     private Connection conexão;

@@ -6,9 +6,11 @@ public class Topico {
     private String nome;
     private String autor;
     private Date dataCriacao;
-    
+    private Integer numPost;
     private Assunto assunto;
+    private Post ultimoPost;
     private List<Post> posts;
+    private String mensagem;
     
     public Topico() {}
     public Integer getIdTopico() {
@@ -46,6 +48,19 @@ public class Topico {
     }
     public void setPosts(List<Post> posts) {
         this.posts = posts;
+    }
+    public Integer getNumPost() {
+        this.setNumPost(getPosts().size());
+        return numPost;
+    }
+    public void setNumPost(Integer numPost) {
+        this.numPost = numPost;
+    }
+    public Post getUltimoPost() {
+        return ultimoPost;
+    }
+    public void setUltimoPost(Post ultimoPost) {
+        this.ultimoPost = ultimoPost;
     }
     @Override
     public String toString() {

@@ -1,6 +1,6 @@
 package br.forum.Controller;
-import br.forum.DAO.DAOManager.TopicoManager;
-import br.forum.Model.Topico;
+import br.forum.DAO.DAOManager.*;
+import br.forum.Model.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -21,8 +21,29 @@ public class TopicoServlet extends HttpServlet {
         if(topicos.isEmpty()){
             request.setAttribute("msg", "Não há tópicos disponíveis");
         }else{
-            request.setAttribute("msg", "");
+            request.setAttribute("msg", "Este Assunto possui "+topicos.size()+" topico(s)");
         }
+        
+        PostManager pm = new PostManager();
+        List<Post> auxPosts = null;
+        for(int i=0; i<topicos.size(); i++){
+            auxPosts = pm.procurarALLByTopico(topicos.get(i).getIdTopico());
+            topicos.get(i).setPosts(auxPosts);
+            if(topicos.get(i).getPosts().size() > 0){
+                topicos.get(i).getNumPost();
+                topicos.get(i).setUltimoPost(topicos.get(i).getPosts().get(topicos.get(i).getPosts().size()-1));
+            }else{
+                topicos.get(i).setNumPost(0);
+                Post p = new Post();
+                p.setAutor("Não há respostas");
+                p.setDataCriacao(null);
+                topicos.get(i).setUltimoPost(p);
+            }
+        }
+        
+        
+                
+                
         request.setAttribute("topicos", "");
         request.setAttribute("topicos", topicos);
         System.out.println(topicos);

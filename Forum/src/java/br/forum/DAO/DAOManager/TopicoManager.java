@@ -1,12 +1,9 @@
 package br.forum.DAO.DAOManager;
 
-import br.forum.DAO.IDAOManager.ITopicoManager;
-import br.forum.DAO.IDAOManager.IDAOManager;
-import br.forum.DAO.DAO.AssuntoDAO;
-import br.forum.DAO.DAO.TopicoDAO;
-import br.forum.Model.Assunto;
-import br.forum.Model.Topico;
-import java.util.List;
+import br.forum.DAO.IDAOManager.*;
+import br.forum.DAO.DAO.*;
+import br.forum.Model.*;
+import java.util.*;
 
 public class TopicoManager implements ITopicoManager{
 
@@ -57,5 +54,8 @@ public class TopicoManager implements ITopicoManager{
             throw ex;
         }
     }
+    
+    
+    
     
 }

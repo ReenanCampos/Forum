@@ -4,7 +4,9 @@ public class Assunto {
     private Integer idAssunto;
     private String nome;
     private String descricao;
-    
+    private Integer numTopico;
+    private Integer numTotalRespostas;
+    private Post ultimoPost;
     private List<Topico> topicos;
 
     public Assunto(){}
@@ -31,6 +33,26 @@ public class Assunto {
     }
     public void setTopicos(List<Topico> topicos) {
         this.topicos = topicos;
+    }
+    
+    public Integer getNumTopico() {
+        return numTopico;
+    }
+    public void setNumTopico(Integer numTopico) {
+        this.numTopico = numTopico;
+    }
+    public Post getUltimoPost() {
+        return ultimoPost;
+    }
+    public void setUltimoPost(Post ultimoPost) {
+        this.ultimoPost = ultimoPost;
+    }
+    public Integer getNumTotalRespostas() {
+        return numTotalRespostas;
+    }
+    public void setNumTotalRespostas(Integer numTotalRespostas) {
+        if(this.numTotalRespostas == null) this.numTotalRespostas = 0;
+        this.numTotalRespostas += numTotalRespostas;
     }
     @Override
     public String toString() {

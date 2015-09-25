@@ -57,7 +57,7 @@ public class PostDAO implements IPostDAO{
         PreparedStatement stmt;
         ResultSet rs;
         try {
-            stmt = conexão.prepareStatement("SELECT * FROM post WHERE idPost=?");
+            stmt = conexão.prepareStatement("SELECT * FROM post WHERE idTopicoFK=?");
             stmt.setInt(1, id);
             rs = stmt.executeQuery();
             Post p = null;

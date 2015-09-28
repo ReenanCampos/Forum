@@ -1,24 +1,35 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Posts</title>
     </head>
     <body>
-        <h1> Forum Progmania - Posts </h1>
-        <h3 style="text-align:left"><a href="/Forum/topicos/?idAssunto=${idAssuntoFK}">Voltar para Tópicos</a></h3>
+        <h1> Forum ProgMania - Posts </h1>
+        <h3 style="text-align:left"><a href="/Forum/topicos/?idAssunto=${idAssuntoFK}"> [/\] Voltar para os Tópicos</a></h3>
         <hr>
+        <br><br>
+        <h2>${msg}</h2>
+        <div style="border:solid 1px; width: 200px;">
+            <a style="text-align:center;" href="/Forum/novoPost/?idTopico=${idTopico}&idAssuntoFK=${idAssuntoFK}">Responder a este tópico</a>
+        </div>
+        <br><br>
         <div style="text-align: center;"> 
             <c:forEach var="p" items="${posts}" >
                 <div class="post">
                     <div class="post cabecalho">
                         <p>Autor: <c:out value="${p.autor}"></c:out> <br>
-                        Data: <c:out value="${p.dataCriacao}"></c:out></p>
+                        Data: <fmt:formatDate pattern="dd/MM/yyyy" value="${p.dataCriacao}"></fmt:formatDate></p>
                     </div>
                     <p style="text-align: left; padding-left: 3%;"><c:out value="${p.texto}"></c:out></p>
                 </div>
+                <br><br>
             </c:forEach>
         </div
+        
+        <br><br><br><br>
+        
     </body>
     <style>
             body{

@@ -35,7 +35,6 @@ public class AssuntoServlet extends HttpServlet {
             for(int i2=0; i2<topicos.size(); i2++){
                 auxPosts = pm.procurarALLByTopico(topicos.get(i2).getIdTopico());
                 topicos.get(i2).setPosts(auxPosts);
-                System.out.println("\n qqq = " + topicos.size() + "\nvalor do i:" + i + "\nvalor do i2:" + i2);
                 assuntos.get(i).setTopicos(topicos);
                 if(topicos.get(i2).getPosts().size() > 0){
                     topicos.get(i2).getNumPost();
@@ -64,7 +63,6 @@ public class AssuntoServlet extends HttpServlet {
         
         request.setAttribute("assuntos", "");
         request.setAttribute("assuntos", assuntos);
-        System.out.println(assuntos);
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/home.jsp");
         rd.forward(request, response);
         

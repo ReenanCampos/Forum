@@ -16,10 +16,11 @@ public class PostDAO implements IPostDAO{
     public Post inserir(Post post){
         PreparedStatement stmt;
         try {
-            stmt = conexão.prepareStatement("INSERT INTO post (autor, texto, dataCriacao) values (?, ?, ?)");
+            stmt = conexão.prepareStatement("INSERT INTO post (autor, texto, dataCriacao, idTopicoFK) values (?, ?, ?, ?)");
             stmt.setString(1, post.getAutor());
             stmt.setString(2, post.getTexto());
             stmt.setDate(3, new java.sql.Date(post.getDataCriacao().getTime()));
+            stmt.setInt(4, post.getTopico().getIdTopico());
             stmt.executeUpdate();
             return post;
         } catch (Exception ex) {

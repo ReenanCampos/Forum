@@ -3,6 +3,7 @@ import br.forum.DAO.DAOManager.*;
 import br.forum.Model.*;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,9 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 public class TopicoServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("ÉOQ");
         Integer aux = new Integer(request.getParameter("idAssunto"));
-        System.out.println(aux);
         TopicoManager tm = new TopicoManager();
         List<Topico> topicos = tm.procurarALLByAssunto(aux);
         if(topicos.isEmpty()){
@@ -41,22 +40,53 @@ public class TopicoServlet extends HttpServlet {
             }
         }
         
+           
+        
         
                 
                 
         request.setAttribute("topicos", "");
         request.setAttribute("topicos", topicos);
-        System.out.println(topicos);
-        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/topicos.jsp");
-        rd.forward(request, response);
-        
+        request.setAttribute("idAssunto", aux);
+        String redirect = request.getServletPath();
+        if(redirect.contains("novo")){
+            RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/novoTopico.jsp");
+            rd.forward(request, response);
+        }else{
+            RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/topicos.jsp");
+            rd.forward(request, response);
+        }
     }
     
     
     
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String autor = request.getParameter("autor"), texto = request.getParameter("texto"), titulo = request.getParameter("nome");
+        Date d = new Date();
+        Integer idAssunto = new Integer (request.getParameter("idAssunto"));
         
+        TopicoManager tm = new TopicoManager();
+        Topico t = new Topico();
+        Assunto a = new Assunto(); a.setIdAssunto(idAssunto);
+        t.setAutor(autor); t.setDataCriacao(d); t.setNome(titulo); t.setAssunto(a);
+        t = tm.cadastrar(t);
+        
+        PostManager pm = new PostManager();
+        Post p = new Post();
+        p.setAutor(autor);
+        p.setDataCriacao(d);
+        p.setTexto(texto);
+        p.setTopico(t);
+        pm.cadastrar(p);
+        
+        request.setAttribute("idTopico", t.getIdTopico());
+        request.setAttribute("idAssunto", idAssunto);
+        
+        response.setHeader("Refresh","2");
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/topicos.jsp");
+        request.setAttribute("msg2", "Recarregando pagina, por favor, aguarde");
+        rd.forward(request, response);
         
         
     }

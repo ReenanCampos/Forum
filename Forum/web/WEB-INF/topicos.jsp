@@ -1,18 +1,28 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Topicos</title>
     </head>
     <body>
-        <h1> Forum Progmania - Tópicos </h1>
-        <h3 style="text-align:left"><a href="/Forum/home">Voltar para Assuntos</a></h3>
+        <h1> Forum ProgMania - Tópicos </h1>
+        <h3 style="text-align:left"><a href="/Forum/home"> [/\] Voltar para os Assuntos</a></h3>
         <hr>
+        
+        <br><br>
+        <h2>${msg2}</h2>
+        <div style="border:solid 1px; width: 200px;">
+            <a style="text-align:center;" href="/Forum/novoTopico/?idAssunto=${idAssunto}">Novo Tópico</a>
+        </div>
+        <br><br>
+        
         <div class="datagrid">
             <table>
                 <thead>
                     <tr>
                         <th>Tópico</th>
+                        <th>Visitas</th>
                         <th>Respostas</th>
                         <th>Autor</th>
                         <th>Criado em</th>
@@ -21,15 +31,17 @@
                 </thead>
                     <tr style="text-align:center;"><td><p>${msg}</p></td></tr>
                 <c:forEach var="p" items="${topicos}">
-                    <tr style="border: solid 1px; text-align:left; font-size:15px">
+                    <tr class="${p.idTopico % 2 == 0 ? 'classetdpar' : 'classetdimpar'}" style="border: solid 1px; text-align:left; font-size:15px">
                         <td style="font-size:15px;"><a href="/Forum/posts/?idTopico=${p.idTopico}&idAssuntoFK=${p.assunto.idAssunto}"><c:out value="${p.nome}"></c:out></a></td>
+                        <td><c:out value="${p.visitas}"></c:out></td>
                         <td><c:out value="${p.numPost}"></c:out></td>
                         <td style="font-size:15px;"><c:out value="${p.autor}"></c:out></td>
-                        <td style="font-size:15px;"><c:out value="${p.dataCriacao}"></c:out></td>
-                        <td><c:out value="${p.ultimoPost.autor}"></c:out> <br> <c:out value="${p.ultimoPost.dataCriacao}"></c:out></td>
+                        <td style="font-size:15px;"><fmt:formatDate pattern="dd/MM/yyyy" value="${p.dataCriacao}"></fmt:formatDate></td>
+                        <td><c:out value="${p.ultimoPost.autor}"></c:out> <br> <fmt:formatDate pattern="dd/MM/yyyy" value="${p.ultimoPost.dataCriacao}"></fmt:formatDate></td>
                     </tr>
+                    <c:set value="${idAssunto}" var="idAssunto"></c:set>
                 </c:forEach>
-                <tfoot><tr><td colspan="5"><div id="paging"><ul><li><br><span>ProgMania &reg;2015 <br></span><br></li></ul></div></td></tr></tfoot>
+                <tfoot><tr><td colspan="6"><div id="paging"><ul><li><br><span>ProgMania &reg;2015 <br></span><br></li></ul></div></td></tr></tfoot>
             
             </table>
         </div>

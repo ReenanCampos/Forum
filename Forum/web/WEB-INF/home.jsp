@@ -1,11 +1,12 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Assuntos</title>
     </head>
     <body>
-        <h1> Forum Progmania - Assuntos </h1>
+        <h1> Forum ProgMania - Assuntos </h1>
         <h3 style="text-align:left"> Bem Vindo !</h3>
         <hr>
         <div class="datagrid">
@@ -14,9 +15,9 @@
                     <tr>
                         <th>Assunto</th>
                         <th>Descrição</th>
+                        <th>Tópicos</th>
+                        <th>Respostas</th>
                         <th>Ultimo Post</th>
-                        <th>NumTopico</th>
-                        <th>TotalResp</th>
                     </tr>
                 </thead>
                     <tbody>
@@ -24,16 +25,18 @@
                         <tr class="${p.idAssunto % 2 == 0 ? 'classetdimpar' : 'classetdpar'}" style="height: 70px;  border: solid 1px; text-align:left; font-size:15px">
                             <td style="font-size:18px;"><a href="topicos/?idAssunto=${p.idAssunto}"><c:out value="${p.nome}"></c:out></a></td>
                             <td style="font-size:15px;"><c:out value="${p.descricao}"></c:out></td>
+                            
+                            <td><c:out value="${p.numTopico}"></c:out></td>
+                            <td><c:out value="${p.numTotalRespostas}"></c:out></td>
                             <c:choose>
                                 <c:when test="${p.ultimoPost.dataCriacao != null}">
-                                  <td><a href="posts/?idTopico=${p.ultimoPost.topico.idTopico}&idAssuntoFK=${p.idAssunto}" ><c:out value="${p.ultimoPost.autor}"></c:out></a> <br> <c:out value="${p.ultimoPost.dataCriacao}"></c:out> </td>
+                                  <td><a href="posts/?idTopico=${p.ultimoPost.topico.idTopico}&idAssuntoFK=${p.idAssunto}" ><c:out value="${p.ultimoPost.autor}"></c:out></a> <br> <fmt:formatDate pattern="dd/MM/yyyy" value="${p.ultimoPost.dataCriacao}"></fmt:formatDate> </td>
+                                  
                                 </c:when>
                                 <c:otherwise>
                                     <td>Não há respostas</td>
                                 </c:otherwise>
                             </c:choose>
-                            <td><c:out value="${p.numTopico}"></c:out></td>
-                            <td><c:out value="${p.numTotalRespostas}"></c:out></td>
                         </tr>
                     </c:forEach>
                     </tbody>

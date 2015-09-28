@@ -16,11 +16,20 @@ public class TopicoDAO implements ITopicoDAO{
     public Topico inserir(Topico topico){
         PreparedStatement stmt;
         try {
-            stmt = conexão.prepareStatement("INSERT INTO topico (nome, autor, dataCriacao) values (?, ?, ?)");
+            stmt = conexão.prepareStatement("INSERT INTO topico (nome, autor, dataCriacao, idAssuntoFK, visitas) values (?, ?, ?, ?, ?)",Statement.RETURN_GENERATED_KEYS);
             stmt.setString(1, topico.getNome());
             stmt.setString(2, topico.getAutor());
             stmt.setDate(3, new java.sql.Date(topico.getDataCriacao().getTime()));
+            stmt.setInt(4, topico.getAssunto().getIdAssunto());
+            stmt.setInt(5, 0);
             stmt.executeUpdate();
+            
+            Integer idRetorno = -1;
+            ResultSet rs = stmt.getGeneratedKeys();
+            if(rs.next()){
+                idRetorno = rs.getInt(1);
+            }
+            topico.setIdTopico(idRetorno);
             return topico;
         } catch (Exception ex) {
             throw new DAOException("Ocorreu um erro ao inserir Topico");
@@ -45,7 +54,7 @@ public class TopicoDAO implements ITopicoDAO{
                 t.setDataCriacao(rs.getDate("dataCriacao"));
                 t.setIdTopico(rs.getInt("idTopico"));
                 a.setIdAssunto(rs.getInt("idAssuntoFK")); t.setAssunto(a);
-                
+                t.setVisitas(rs.getInt("visitas"));
             }else throw new Exception("Ocorreu um erro ao procurar o ID "+ id +" em Topico");
             return t;
         } catch (Exception ex) {
@@ -72,11 +81,25 @@ public class TopicoDAO implements ITopicoDAO{
                 t.setDataCriacao(rs.getDate("dataCriacao"));
                 t.setIdTopico(rs.getInt("idTopico"));
                 a.setIdAssunto(rs.getInt("idAssuntoFK")); t.setAssunto(a);
+                t.setVisitas(rs.getInt("visitas"));
                 topicos.add(t);
             }
             return topicos;
         } catch (Exception ex) {
             throw new DAOException("Ocorreu um erro ao procurar ALL em Topico");
+        }
+    }
+
+    @Override
+    public void contadorVisitas(Integer id) {
+        PreparedStatement stmt;
+        try {
+            stmt = conexão.prepareStatement("UPDATE topico set visitas=visitas +1 WHERE idTopico=?");
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+            return;
+        } catch (Exception ex) {
+            throw new DAOException("Ocorreu um erro ao inserir Topico");
         }
     }
 }

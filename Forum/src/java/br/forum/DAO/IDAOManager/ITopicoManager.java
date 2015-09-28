@@ -8,4 +8,5 @@ public interface ITopicoManager {
     Topico cadastrar(Topico topico);
     Topico procurarID(Integer id);
     List<Topico> procurarALLByAssunto(Integer id);
+    void addVisitas(Integer id);
 }

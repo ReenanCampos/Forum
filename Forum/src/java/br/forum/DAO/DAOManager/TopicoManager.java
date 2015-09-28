@@ -54,6 +54,24 @@ public class TopicoManager implements ITopicoManager{
             throw ex;
         }
     }
+
+    @Override
+    public void addVisitas(Integer id) {
+        IDAOManager manager = new DAOManager();
+        try{
+            manager.iniciar();
+            TopicoDAO td = manager.getTopicoDAO();
+            td.contadorVisitas(id);
+            manager.confirmarTransação();
+            manager.encerrar();
+            return;
+        }catch(Exception ex){
+            manager.abortarTransação();
+            throw ex;
+        }
+    }
+    
+    
     
     
     

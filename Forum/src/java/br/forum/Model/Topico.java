@@ -11,6 +11,7 @@ public class Topico {
     private Post ultimoPost;
     private List<Post> posts;
     private String mensagem;
+    private Integer visitas;
     
     public Topico() {}
     public Integer getIdTopico() {
@@ -61,6 +62,12 @@ public class Topico {
     }
     public void setUltimoPost(Post ultimoPost) {
         this.ultimoPost = ultimoPost;
+    }
+    public Integer getVisitas() {
+        return visitas;
+    }
+    public void setVisitas(Integer visitas) {
+        this.visitas = visitas;
     }
     @Override
     public String toString() {
